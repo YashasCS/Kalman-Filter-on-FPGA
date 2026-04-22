@@ -32,7 +32,7 @@ The design was built by clicking "Generate Bitstream," which ran synthesis and i
 <img width="837" height="297" alt="image" src="https://github.com/user-attachments/assets/707796b5-8ed0-4828-b386-e372428f60bb" />
 
 <br><br>
-In the behavioural we can see that we got multiple outputs within less than 100 cycles, hence we can get 10 outputs within 1000 clock cycles. And from the terminal output we can see that the error of the filtered data compared to the original data is <1.5
+In the behavioural simulation, we can see that we got multiple outputs within less than 100 cycles, hence we can get 10 outputs within 1000 clock cycles. And from the terminal output we can see that the error of the filtered data compared to the original data is <1.5
 
 ### Hardware Utilization
 
