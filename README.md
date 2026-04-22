@@ -2,7 +2,7 @@
 
 ## Objective
 
-The primary objective of this project is to design a Kalman filter in Verilog HDL. This filter will be used to estimate the state of a system (specifically, a vehicle's position and velocity) using fixed-point arithmetic. You will then implement this design on an FPGA. After implementation, you must analyze the design's performance by reporting its hardware utilization, power consumption, and timing , and by calculating its maximum clock frequency and throughput. 
+The primary objective of this project is to design a Kalman filter in Verilog HDL. This filter will be used to estimate the state of a system (specifically, a vehicle's position and velocity) using fixed-point arithmetic. We shall then implement this design on an FPGA. After implementation, we will analyze the design's performance by reporting its hardware utilization, power consumption, and timing , and by calculating its maximum clock frequency and throughput. 
 
 ## Design
 
@@ -12,7 +12,7 @@ The primary objective of this project is to design a Kalman filter in Verilog HD
 * Timing (Output): Your outen signal must be high for only one clock cycle to signal a valid output. The output no must match the index   n of the input it was calculated from.
 * Performance: You must produce at least 10 outputs within the 1000 cycle input window. This means your latency for a single              calculation cannot be too long.
 * Reset: When rst is 0, all data elements and outen must be reset to 0.
-* FPGA IP: You must generate three Block Memory IPs (blk_mem_gen_0, blk_mem_gen_1, blk_mem_gen_2) with the exact port, width, and depth   settings specified in the lab manual.
+* FPGA IP: You must generate three Block Memory IPs (blk_mem_gen_0, blk_mem_gen_1, blk_mem_gen_2) with the exact port, width, and depth   settings specified in the reference manual.
 
 ## Implementation
 
