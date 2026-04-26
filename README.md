@@ -19,6 +19,69 @@ The primary objective of this project is to design a Kalman filter in Verilog HD
 An Finite State Machine (FSM) was designed to manage the multi-cycle "Prediction" and "Update" calculations. All arithmetic logic was implemented using 16-bit signed fixed-point numbers with 10 fractional bits. Asynchronous reset logic was included to clear all registers and outputs to 0 when rst was low. Finally, output control logic was added to assert the outen signal for only one clock cycle when a valid output was ready.
 The design was built by clicking "Generate Bitstream," which ran synthesis and implementation. After the build, the implemented design was opened to gather the Hardware Utilization, Timing Summary, and Power reports. From the Timing Summary, the Maximum Clock Frequency (Fmax) was calculated based on the Worst Negative Slack (WNS) and the target clock period. The Maximum Throughput was then calculated by dividing Fmax by the FSM's total clock cycles per sample. Finally, the hardware (including the bitstream) was exported, a boot image was created in Vitis, and the design was successfully tested on the Zybo board.
 
+Board Used: ```Xilinx XC7Z010-1CLG400C```
+
+## How to implement the design on FPGA?
+
+* Right click `“top_kalman.v”` in the “source” panel and click “set as top” (If this file is already in bold font, it is already the top module).
+
+* Now, ```“top_kalman.v”``` needs a dual port RAM. We add the RAM for ```“top_kalman.v”```.
+
+* On the left panel, click IP catalog, on the top right corner, search “ram”. Double click “block
+memory generator”.
+
+* If there is a window popped up, asking if you want to add IP to block design or customize IP,
+choose customize IP.
+
+* We need a two ports ram for “top_kalman.v”. For memory type, select ```“True Dual Port
+Ram”```, the component name should be ```blk_mem_gen_0```.
+
+* In both port A and port B options, change write width to 8, and write depth to 20000.
+
+* Operation mode ```“Read First”```, enable port type ```“Always Enabled”```. Click ```“ok”```.
+
+* In the pop-up window, select ```“Global”``` in the synthesis option, and click “generate”.
+
+* We also need a single port ram for ```“top_kalman.v”```. For memory type, select ```“Single Port
+Ram”```, the component name should be ```blk_mem_gen_1```.
+
+* In port A option, change write width to 96, and write depth to 1000.
+
+* Operation mode ```“Read First”```, enable port type ```“Always Enabled”```. Click ```“ok”```.
+
+* In the pop-up window, select ```“Global”``` in the synthesis option, and click ```“generate”```.
+
+* We also need another single port ram for ```“top_kalman.v”```. For memory type, select ```“Single
+Port Ram”```, the component name should be ```blk_mem_gen_2```.
+
+* In port A option, change write width to 32, and write depth to 1000.
+
+* Operation mode ```“Read First”```, enable port type ```“Always Enabled”```. Click ```“ok”```.
+
+* In the pop-up window, select ```“Global”``` in the synthesis option, and click ```“generate”```.
+
+* Now, click ```generate bitstream```. After the bitstream is generated, click ```file->export->export
+hardware```. Check include bitstream, click “ok”.
+
+* Now, use Vitis to create the boot image.
+
+* Copy ```BOOT.bin```, ```uramdisk.image.gz```, ```uImage```, ```devicetree.dtb```, ```lab7_kalman_test```, ```lab7_data``` to
+SD card. Insert SD card to Zybo board. For JP5 pins on the Zybo board, connect two SD pins.
+
+* Boot the Linux system on the Zybo board.
+
+* Run the test
+
+                           ./lab7_kalman_test [Clock cycles between each sampling]
+
+* The `[Clock cycles between each sampling]` means how many clocks cycles between each time
+your design samples the input.
+
+* The matrices and inputs needed by the Kalman filter are automatically inputted to your design
+by lab7_kalman_test program. The outputs from your design are read and compared with the
+correct results. If your design is correct, the absolute value of the error should be less than 1.5.
+The results of the FPGA clock cycles are shown in the terminal.
+
 ## Results
 
 <img width="837" height="502" alt="image" src="https://github.com/user-attachments/assets/87528637-4e06-46da-8a28-e329ff4e7970" />
