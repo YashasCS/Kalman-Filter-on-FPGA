@@ -19,7 +19,7 @@ The primary objective of this project is to design a Kalman filter in Verilog HD
 An Finite State Machine (FSM) was designed to manage the multi-cycle "Prediction" and "Update" calculations. All arithmetic logic was implemented using 16-bit signed fixed-point numbers with 10 fractional bits. Asynchronous reset logic was included to clear all registers and outputs to 0 when rst was low. Finally, output control logic was added to assert the outen signal for only one clock cycle when a valid output was ready.
 The design was built by clicking "Generate Bitstream," which ran synthesis and implementation. After the build, the implemented design was opened to gather the Hardware Utilization, Timing Summary, and Power reports. From the Timing Summary, the Maximum Clock Frequency (Fmax) was calculated based on the Worst Negative Slack (WNS) and the target clock period. The Maximum Throughput was then calculated by dividing Fmax by the FSM's total clock cycles per sample. Finally, the hardware (including the bitstream) was exported, a boot image was created in Vitis, and the design was successfully tested on the Zybo board.
 
-Board Used: ```Xilinx XC7Z010-1CLG400C```
+Board Used: ```Xilinx XC7Z010-1CLG400C``` (Required for this project)
 
 ## How to implement the design on FPGA?
 
